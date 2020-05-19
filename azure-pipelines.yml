@@ -14,7 +14,7 @@ steps:
     repository: $(imageName)
     command: build
     Dockerfile: app/Dockerfile
-- bash: 
+- bash: |
     curl -k -O -u sean:foobar $TL_CONSOLE/api/v1/util/twistcli
     chmod a+x twistcli
     ./twistcli images scan --address $TL_CONSOLE -u sean -p foobar --details $(imageName):$(Build.BuildId)
