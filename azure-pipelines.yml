@@ -5,7 +5,6 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageRepository: 'test/pjd' 
   containerRegistry: 'twistlocktest.azurecr.io'
   dockerRegistryServiceConnection: 'e3d40d8b-fc1b-4a97-9824-90dffd80ad0c'
 
@@ -24,7 +23,7 @@ steps:
     script: 
       curl -k -O -u sean:foobar $TL_CONSOLE/api/v1/util/twistcli;
       chmod a+x twistcli;
-      ./twistcli images scan --address $TL_CONSOLE -u sean -p foobar --details $(containerRegistry)/testimage:$(Build.BuildId);
+      ./twistcli images scan --address $TL_CONSOLE -u $USER -p $PW --details $(containerRegistry)/testimage:$(Build.BuildId);
 - task: Docker@2
   displayName: Push to registry
   inputs: 
