@@ -5,7 +5,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'pjd' 
+  imageRepository: 'test/pjd' 
   containerRegistry: 'twistlocktest.azurecr.io'
   dockerRegistryServiceConnection: 'e3d40d8b-fc1b-4a97-9824-90dffd80ad0c'
 
@@ -15,6 +15,7 @@ steps:
   inputs:
     repository: $(imageName)
     command: build
+    containerRegistry: $(dockerRegistryServiceConnection)
     Dockerfile: app/Dockerfile
 - task: Bash@3
   displayName: Twistcli Scan
