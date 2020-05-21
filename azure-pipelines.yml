@@ -6,7 +6,9 @@ pool:
 
 variables:
   imageName: 'pipelines-javascript-docker'
-  container: 
+  imageRepository: 'pjd' 
+  containerRegistry: 'twistlocktest.azurecr.io'
+  dockerRegistryServiceConnection: 'e3d40d8b-fc1b-4a97-9824-90dffd80ad0c'
 
 steps:
 - task: Docker@2
@@ -15,11 +17,14 @@ steps:
     repository: $(imageName)
     command: build
     Dockerfile: app/Dockerfile
-- bash: |
+- task: Bash@3
+  displayName: Twistcli Scan
     curl -k -O -u sean:foobar $TL_CONSOLE/api/v1/util/twistcli
     chmod a+x twistcli
     ./twistcli images scan --address $TL_CONSOLE -u sean -p foobar --details $(imageName):$(Build.BuildId)
 - task: Docker@2
   displayName: Push to registry
   inputs: 
-    containerRegistry: |
+    command: push
+    containerRegistry: $(dockerRegistryServiceConnection)
+    repository: $(imageRepository)
