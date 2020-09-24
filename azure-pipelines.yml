@@ -24,9 +24,9 @@ steps:
       curl -k -O -u $USER:$PW $TL_CONSOLE/api/v1/util/twistcli;
       chmod a+x twistcli;
       ./twistcli images scan --address $TL_CONSOLE -u $USER -p $PW --details $(containerRegistry)/testimage:$(Build.BuildId);
-- task: Docker@2
-  displayName: Push to registry
-  inputs: 
-    command: push
-    containerRegistry: $(dockerRegistryServiceConnection)
-    repository: testimage
+#- task: Docker@2
+#  displayName: Push to registry
+#  inputs: 
+#    command: push
+#    containerRegistry: $(dockerRegistryServiceConnection)
+#    repository: testimage
