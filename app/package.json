@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "object-path": "0.11.4"
+    "object-path": ">0.11.4"
   }
 }
